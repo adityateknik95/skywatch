@@ -1,0 +1,48 @@
+[project]
+name = "skywatch"
+version = "0.1.0"
+description = "ADS-B trajectory anomaly & spoofing detection (OpenSky)"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "sqlalchemy[asyncio]>=2.0.30",
+    "asyncpg>=0.30",
+    "alembic>=1.13",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "numpy>=2.1",
+    "pandas>=2.2",
+    "scikit-learn>=1.4",
+    "joblib>=1.3",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+    "anyio>=4.4",
+    "respx>=0.21",          # httpx mocking for the token manager / client tests
+    "matplotlib>=3.9",      # EDA trajectory plots (Phase 2)
+]
+
+[project.scripts]
+skywatch-collect = "skywatch.collector:main"
+skywatch-reconstruct = "skywatch.reconstruct:main"
+skywatch-features = "skywatch.features:main"
+skywatch-eval = "skywatch.evaluate:main"
+skywatch-api = "skywatch.api.main:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["skywatch*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

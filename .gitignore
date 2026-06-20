@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Env / secrets
+.env
+*.env
+!.env.example
+
+# Models / data artifacts
+*.pt
+*.pth
+*.pkl
+*.joblib
+backend/skywatch/model/artifacts/
+data/
+
+# EDA / generated plots (Phase 2)
+eda_output/
+backend/eda_output/
+
+# Eval outputs (Phase 5)
+eval_output/
+backend/eval_output/
+
+# Node / frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Editors / OS
+.vscode/
+.idea/
+.claude/settings.local.json
+*.swp
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml

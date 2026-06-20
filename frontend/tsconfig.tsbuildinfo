@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/aircraftdetails.tsx","./src/components/anomalypanel.tsx","./src/components/flightmap.tsx","./src/components/scoretimeline.tsx","./src/lib/api.ts","./src/lib/config.ts","./src/lib/ws.ts"],"version":"5.9.3"}

@@ -1,0 +1,27 @@
+# Postgres 16 + TimescaleDB for SkyWatch.
+# The migration (backend/alembic) detects the timescaledb extension and turns
+# raw_states into a hypertable when it's available; on plain Postgres it stays a
+# regular table, so this image is recommended but not strictly required.
+services:
+  db:
+    image: timescale/timescaledb:latest-pg16
+    container_name: skywatch-db
+    environment:
+      POSTGRES_USER: skywatch
+      POSTGRES_PASSWORD: skywatch
+      POSTGRES_DB: skywatch
+    ports:
+      # Host port is configurable: defaults to 5432, override with DB_HOST_PORT in
+      # .env if something else (e.g. a local Postgres install) already uses 5432.
+      - "${DB_HOST_PORT:-5432}:5432"
+    volumes:
+      - skywatch_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skywatch -d skywatch"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  skywatch_pgdata:

@@ -1,0 +1,130 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #10151c;
+  --panel-2: #151b24;
+  --line: #232c38;
+  --text: #e6edf3;
+  --muted: #7b8794;
+  --accent: #5aa5ff;
+  --bad: #ff5252;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { background: var(--bg); color: var(--text); }
+.mono { font-family: "SF Mono", "Cascadia Code", Consolas, monospace; }
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  grid-template-rows: 52px 1fr;
+  grid-template-areas: "top top" "map side";
+  height: 100vh;
+}
+
+/* Top bar */
+.topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.brand .logo { color: var(--accent); font-size: 18px; }
+.brand .subtitle { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
+.stats { display: flex; gap: 18px; font-size: 12px; color: var(--muted); align-items: center; }
+.stats b { color: var(--text); font-weight: 600; }
+.stats b.bad { color: var(--bad); }
+.inject-btn {
+  background: #2a1518; color: #ff8a8a; border: 1px solid #5a2a2a;
+  border-radius: 6px; padding: 5px 11px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+}
+.inject-btn:hover { background: #3a1c20; color: #ffb0b0; }
+.conn { display: flex; align-items: center; gap: 6px; text-transform: capitalize; }
+.conn .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.conn.connected .dot { background: #3ad29f; box-shadow: 0 0 8px #3ad29f; }
+.conn.disconnected .dot { background: var(--bad); }
+
+/* Map */
+.map-cell { grid-area: map; position: relative; overflow: hidden; }
+
+/* Sidebar */
+.sidebar {
+  grid-area: side;
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.panel { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+.panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; border-bottom: 1px solid var(--line);
+}
+.panel-head h2, .panel-head h3 { margin: 0; font-size: 13px; letter-spacing: 0.3px; text-transform: uppercase; color: var(--muted); }
+.count { background: var(--bad); color: #fff; border-radius: 10px; padding: 1px 9px; font-size: 12px; font-weight: 600; }
+.empty { color: var(--muted); font-size: 13px; padding: 16px 14px; }
+
+.anomaly-list { list-style: none; margin: 0; padding: 0; overflow-y: auto; }
+.row {
+  display: grid;
+  grid-template-columns: 12px 1fr auto auto;
+  gap: 10px; align-items: center;
+  padding: 9px 14px; cursor: pointer; border-bottom: 1px solid var(--panel-2);
+  font-size: 13px;
+}
+.row:hover { background: var(--panel-2); }
+.row.sel { background: #18222e; box-shadow: inset 3px 0 0 var(--accent); }
+.row .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); }
+.row .id { font-weight: 600; font-family: "SF Mono", Consolas, monospace; }
+.row .reason { color: var(--muted); font-size: 11px; justify-self: end; }
+.row .score { font-family: "SF Mono", Consolas, monospace; color: var(--accent); min-width: 40px; text-align: right; }
+
+/* Selected / injected aircraft details */
+.details { border-top: 1px solid var(--line); flex-shrink: 0; }
+.details.injected { box-shadow: inset 0 0 0 1px #5a2a2a; background: #150e10; }
+.det-body { padding: 8px 14px 12px; }
+.det-id { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.det-id .callsign { font-size: 16px; font-weight: 700; font-family: "SF Mono", Consolas, monospace; }
+.atk-badge {
+  background: #3a1c20; color: #ff8a8a; border: 1px solid #5a2a2a;
+  border-radius: 4px; padding: 1px 7px; font-size: 11px; font-weight: 600;
+}
+.det-status { font-size: 12px; margin-bottom: 8px; color: var(--muted); }
+.det-status.ok { color: #3ad29f; }
+.det-status.bad { color: var(--bad); font-weight: 600; }
+.det-reason {
+  display: flex; flex-direction: column; gap: 3px;
+  margin-bottom: 10px; padding: 7px 10px;
+  background: #1a1012; border: 1px solid #3a1c20; border-radius: 6px;
+}
+.det-reason .rcode { font-family: "SF Mono", Consolas, monospace; font-size: 11px; color: #ff8a8a; }
+.det-reason .rtext { font-size: 12px; color: var(--text); line-height: 1.35; }
+.det-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 13px;
+  font-family: "SF Mono", Consolas, monospace;
+}
+.det-grid div { display: flex; justify-content: space-between; border-bottom: 1px solid var(--panel-2); padding-bottom: 3px; }
+.det-grid label { color: var(--muted); font-family: -apple-system, sans-serif; }
+
+/* Timeline */
+.timeline { border-top: 1px solid var(--line); padding-bottom: 8px; flex-shrink: 0; }
+.timeline .hint { color: var(--muted); font-size: 11px; padding: 4px 14px 0; margin: 0; }
+.tl-controls { display: flex; align-items: center; gap: 6px; padding: 8px 14px 2px; }
+.tl-btn {
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+  border-radius: 5px; min-width: 26px; height: 24px; font-size: 13px; line-height: 1;
+  cursor: pointer; padding: 0 6px;
+}
+.tl-btn.wide { font-size: 11px; }
+.tl-btn:hover { background: #1c2530; border-color: #34404e; }
+.tl-ymax { color: var(--muted); font-size: 11px; margin-left: auto; font-family: "SF Mono", Consolas, monospace; }
+
+/* deck.gl tooltip readability */
+.deck-tooltip { background: #10151c !important; border: 1px solid var(--line); border-radius: 4px; }
