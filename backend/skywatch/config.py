@@ -52,9 +52,10 @@ class Settings(BaseSettings):
     anomaly_threshold_percentile: float = Field(default=99.0, gt=0.0, lt=100.0)
 
     # --- Live scoring service (Phase 6) ---
-    scoring_mode: str = "replay"          # "replay" (from DB) or "live" (OpenSky)
+    scoring_mode: str = "replay"          # "demo" (bundled file, no DB) | "replay" (DB) | "live"
     replay_minutes: int = Field(default=20, ge=1)
     replay_interval_seconds: float = Field(default=1.0, gt=0.0)
+    cors_origins: str = "*"               # comma-separated allowed origins ("*" = any)
 
     # --- Database ---
     database_url: str = "postgresql+asyncpg://skywatch:skywatch@localhost:5432/skywatch"

@@ -68,6 +68,11 @@ npm install
 npm run dev                            #  → http://localhost:5173
 ```
 
+> **No database at all?** Run `SCORING_MODE=demo python -m skywatch.api.main` — a
+> self-contained mode that streams a bundled replay slice with the model baked in.
+> This is what the hosted demo uses; see [`DEPLOY.md`](DEPLOY.md) to put it online
+> (Hugging Face Spaces + Vercel, free).
+
 Open **http://localhost:5173**, then hit **⚡ Inject attack** to spoof a live plane
 and watch it flag red — with a plain-English reason for *why*.
 

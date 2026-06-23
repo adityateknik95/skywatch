@@ -1,0 +1,26 @@
+{
+  "n_features": 16,
+  "hidden_size": 64,
+  "num_layers": 1,
+  "dropout": 0.0,
+  "window": 20,
+  "feature_names": [
+    "latitude",
+    "longitude",
+    "baro_altitude",
+    "geo_altitude",
+    "velocity",
+    "vertical_rate",
+    "track_sin",
+    "track_cos",
+    "computed_groundspeed",
+    "speed_residual",
+    "heading_change_rate",
+    "heading_residual",
+    "accel",
+    "computed_vertical_rate",
+    "vertical_rate_residual",
+    "baro_geo_alt_diff"
+  ],
+  "best_val_mse": 0.36534627817268434
+}

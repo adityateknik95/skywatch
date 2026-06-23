@@ -1,0 +1,31 @@
+# Keep the backend image small — only ship what the demo container needs.
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+backend/.venv/
+.git/
+.claude/
+frontend/
+node_modules/
+eda_output/
+eval_output/
+backend/eda_output/
+backend/eval_output/
+
+# Secrets and env
+.env
+*.env
+!.env.example
+
+# Big / derived model artifacts not needed for serving (the tiny serving set stays)
+backend/skywatch/model/artifacts/features.npz
+backend/skywatch/model/artifacts/transformer.pt
+backend/skywatch/model/artifacts/*.lstm.json
+backend/skywatch/model/artifacts/feature_meta.json
+
+# Misc
+*.md
+!README.md
+docker-compose*.yml
+Start-SkyWatch-Docker.bat
+scripts/

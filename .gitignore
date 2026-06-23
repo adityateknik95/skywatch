@@ -24,8 +24,14 @@ htmlcov/
 *.pth
 *.pkl
 *.joblib
-backend/skywatch/model/artifacts/
 data/
+# Ignore the big/derived model artifacts, but COMMIT the tiny serving set so the
+# hosted demo container has the trained model baked in.
+backend/skywatch/model/artifacts/*
+!backend/skywatch/model/artifacts/lstm.pt
+!backend/skywatch/model/artifacts/scaler.joblib
+!backend/skywatch/model/artifacts/model_config.json
+!backend/skywatch/model/artifacts/threshold.json
 
 # EDA / generated plots (Phase 2)
 eda_output/
